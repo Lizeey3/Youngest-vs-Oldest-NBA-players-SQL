@@ -1,0 +1,161 @@
+proc sql number;
+title "&name,&sysday, &sysdate, &systime"; 
+ select youngest.season1 as season , player_name1 as youngest, age1, 
+team_abbreviation1, player_name2 
+as oldest , age2, team_abbreviation2
+from youngest, oldest
+where youngest.season1= oldest.season2;
+quit;
+
+proc sql number; 
+title "&name,&sysday, &sysdate, &systime";
+select player_name,age, season, team_abbreviation
+from NBA_roster
+/*where age =min(age)*/
+group by season
+having age=max(age); 
+quit;
+
+
+data youngest;
+input player_name1 $ 1-17 age1 $ season1 $ team_abbreviation1 $ ;
+cards; 
+Jermaine O'Neal 18 1996-97 POR
+Kobe Bryant 18 1996-97 LAL
+Tracy McGrady 19 1997-98 TOR
+Kobe Bryant 19 1997-98 LAL
+Jermaine O'Neal 19 1997-98 POR
+Al Harrington 19 1998-99 IND
+Rashard Lewis 19 1998-99 SEA
+Ricky Davis 19 1998-99 CHH
+Bruno Sundov 19 1998-99 DAL
+Jonathan Bender 19 1999-00 IND
+Darius Miles 19 2000-01 LAC
+Eddy Curry 19 2001-02 CHI
+Gerald Wallace 19 2001-02 SAC
+Tyson Chandler 19 2001-02 CHI
+Eddy Curry 20 2002-03 CHI
+Jamal Sampson 20 2002-03 MIL
+Dajuan Wagner 20 2002-03 CLE
+Chris Wilcox 20 2002-03 LAC
+Amar'e Stoudemir 20 2002-03 PHX
+Tyson Chandler 20 2002-03 CHI
+Gerald Wallace 20 2002-03 SAC
+Nene 20 2002-03 DEN
+Nikoloz Tskitish 20 2002-03 DEN
+Darko Milicic 19 2003-04 DET
+Travis Outlaw 19 2003-04 POR
+Maciej Lampe 19 2003-04 PHX
+Kendrick Perkins 19 2003-04 BOS
+LeBron James 19 2003-04 CLE
+Dorell Wright 19 2004-05 MIA
+Dwight Howard 19 2004-05 ORL
+Ha Ha 19 2004-05 POR
+Josh Smith 19 2004-05 ATL
+JR Smith 19 2004-05 NOH
+Andris Biedrins 19 2004-05 GSW
+Shaun Livingston 19 2004-05 LAC
+Robert Swift 19 2004-05 SEA
+Andrew Bynum 18 2005-06 LAL
+Andrew Bynum 19 2006-07 LAL
+Kevin Durant 19 2007-08 SEA
+Anthony Randolph 19 2008-09 GSW
+DeMar DeRozan 20 2009-10 TOR
+James Harden 20 2009-10 OKC
+Anthony Randolph 20 2009-10 GSW
+Brandon Jennings 20 2009-10 MIL
+Tyreke Evans 20 2009-10 SAC
+Jrue Holiday 20 2009-10 PHI
+Serge Ibaka 20 2009-10 OKC
+Derrick Favors 19 2010-11 UTA
+Tobias Harris 19 2011-12 MIL
+Bismack Biyombo 19 2011-12 CHA
+Andre Drummond 19 2012-13 DET
+Michael Kidd-Gil 19 2012-13 CHA
+Archie Goodwin 19 2013-14 PHX
+Giannis Antetoko 19 2013-14 MIL
+James Young 19 2014-15 BOS
+Dante Exum 19 2014-15 UTA
+Aaron Gordon 19 2014-15 ORL
+Noah Vonleh 19 2014-15 CHA
+Bruno Caboclo 19 2014-15 TOR
+Rashad Vaughn 19 2015-16 MIL
+Devin Booker 19 2015-16 PHX
+Georgios Papagia 19 2016-17 SAC
+Dragan Bender 19 2016-17 PHX
+Brandon Ingram 19 2016-17 LAL
+Marquese Chriss 19 2016-17 PHX
+Frank Ntilikina 19 2017-18 NYK
+Ike Anigbogu 19 2017-18 IND
+Isaac Bonga 19 2018-19 LAL
+Jaren Jackson Jr 19 2018-19 MEM
+Troy Brown Jr. 19 2018-19 WAS
+Kevin Knox II 19 2018-19 NYK
+Talen Horton-Tuc 19 2019-20 LAL
+Zion Williamson 19 2019-20 NOP
+Sekou Doumbouya 19 2019-20 DET
+Alen Smailagic 19 2019-20 GSW
+LaMelo Ball 19 2020-21 CHA
+Killian Hayes 19 2020-21 DET
+Patrick Williams 19 2020-21 CHI
+Anthony Edwards 19 2020-21 MIN
+Aleksej Pokusevs 19 2020-21 OKC
+;
+proc print; 
+run; 
+
+
+data oldest ; 
+input player_name2 $ 1-16 age2 $ season2 $ team_abbreviation2 $ ;
+cards;
+Robert Parish 43 1996-97 CHI
+Charles Jones 41 1997-98 HOU
+Herb Williams 41 1998-99 NYK
+Mark West 39 1999-00 PHX
+Dale Ellis 39 1999-00 CHH
+Dennis Rodman 39 1999-00 DAL
+Sam Perkins 39 1999-00 IND
+Terry Cummings 39 1999-00 GSW
+Sam Perkins 40 2000-01 IND
+John Stockton 40 2001-02 UTA
+John Stockton 41 2002-03 UTA
+Kevin Willis 41 2003-04 SAS
+Kevin Willis 42 2004-05 ATL
+Dikembe Mutombo 40 2005-06 HOU
+Kevin Willis 44 2006-07 DAL
+Dikembe Mutombo 42 2007-08 HOU
+Dikembe Mutombo 43 2008-09 HOU
+Lindsey Hunter 39 2009-10 CHI
+Shaquille O'Neal 39 2010-11 BOS
+Juwan Howard 39 2011-12 MIA
+Jason Kidd 39 2011-12 DAL
+Grant Hill 39 2011-12 PHX
+Kurt Thomas 39 2011-12 POR
+Grant Hill 40 2012-13 LAC
+Kurt Thomas 40 2012-13 NYK
+Juwan Howard 40 2012-13 MIA
+Jason Kidd 40 2012-13 NYK
+Steve Nash 40 2013-14 LAL
+Kevin Garnett 39 2014-15 MIN
+Tim Duncan 39 2014-15 SAS
+Andre Miller 39 2014-15 SAC
+Kevin Garnett 40 2015-16 MIN
+Tim Duncan 40 2015-16 SAS
+Andre Miller 40 2015-16 SAS
+Vince Carter 40 2016-17 MEM
+Vince Carter 41 2017-18 SAC
+Vince Carter 42 2018-19 ATL
+Vince Carter 43 2019-20 ATL
+Udonis Haslem 41 2020-21 MIA
+; 
+proc print; 
+run;
+
+proc sql number;
+title "&name,&sysday, &sysdate, &systime"; 
+ select youngest.season1 as season , player_name1 as youngest, age1, 
+team_abbreviation1, player_name2 
+as oldest , age2, team_abbreviation2
+from youngest, oldest
+where youngest.season1= oldest.season2;
+quit;
